@@ -48,7 +48,6 @@ class GyroCube{
     pin,
     Intensity,
    *pixels;
-   **display;
   uint32_t
     finalTime;
     uint32_t delay = 50L;
