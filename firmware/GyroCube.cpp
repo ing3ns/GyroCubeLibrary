@@ -142,11 +142,11 @@ void GyroCube::setPixel(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
 
 void GyroCube::setPixel(uint16_t n, uint32_t c) {
   if(n < LEDs) {
-       
+    uint8_t r,g,b;
     if(Intensity) {
-      uint8_t r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
-      uint8_t g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
-      uint8_t b = ( (c&0x0000FF) * Intensity ) >> 8;
+      r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
+      g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
+      b = ( (c&0x0000FF) * Intensity ) >> 8;
     }
     uint8_t *p = &pixels[n * 3];
     *p++ = g;
