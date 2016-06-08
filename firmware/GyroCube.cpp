@@ -1,4 +1,3 @@
-
 #include "GyroCube.h"
 
 STM32_Pin_Info* PIN_MAP2 = HAL_Pin_Map(); // Pointer required for highest access speed
@@ -7,7 +6,7 @@ STM32_Pin_Info* PIN_MAP2 = HAL_Pin_Map(); // Pointer required for highest access
 #define pinSet(_pin, _hilo) (_hilo ? pinHI(_pin) : pinLO(_pin))
 
 
-GyroCube::GyroCube():LEDs(320), Bytes(320*3), pin(2), Intensity(0), pixels(NULL), finalTime(0)
+GyroCube::GyroCube():LEDs(384), Bytes(384*3), pin(2), Intensity(0), pixels(NULL), finalTime(0)
 {
   if((pixels = (uint8_t *)malloc(Bytes))) {
     memset(pixels, 0, Bytes);
@@ -129,7 +128,7 @@ void GyroCube::show(void) {
 // Set pixel color from separate R,G,B components:
 void GyroCube::setPixel(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
   if(n < LEDs) {
-    if(Intensity) { // See notes in setBrightness()
+    if(Intensity) {
       r = (r * Intensity) >> 8;
       g = (g * Intensity) >> 8;
       b = (b * Intensity) >> 8;
@@ -141,24 +140,23 @@ void GyroCube::setPixel(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
   }
 }
 
-void GyroCube::setIntensity(uint8_t b) {
-
-  uint8_t newIntensity = b + 1;
-  if(newIntensity != Intensity) { // Compare against prior value
-    // Brightness has changed -- re-scale existing data in RAM
-    uint8_t  c,
-            *ptr           = pixels,
-             oldIntensity = Intensity - 1; // De-wrap old brightness value
-    uint16_t scale;
-    if(oldIntensity == 0) scale = 0; // Avoid /0
-    else if(b == 255) scale = 65535 / oldIntensity;
-    else scale = (((uint16_t)newIntensity << 8) - 1) / oldIntensity;
-    for(uint16_t i=0; i<Bytes; i++) {
-      c      = *ptr;
-      *ptr++ = (c * scale) >> 8;
+void GyroCube::setPixel(uint16_t n, uint32_t c) {
+  if(n < LEDs) {
+       
+    if(Intensity) {
+      uint8_t r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
+      uint8_t g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
+      uint8_t b = ( (c&0x0000FF) * Intensity ) >> 8;
     }
-    Intensity = newIntensity;
+    uint8_t *p = &pixels[n * 3];
+    *p++ = g;
+    *p++ = r;
+    *p = b;
   }
+}
+
+void GyroCube::setIntensity(uint8_t b) {
+     Intensity=b;
 }
 
 void GyroCube::clear(void) {
