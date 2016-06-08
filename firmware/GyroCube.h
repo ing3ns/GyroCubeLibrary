@@ -37,11 +37,11 @@ class GyroCube{
   ~GyroCube();
 
   
-    begin(void),
-    show(void),
-    setPixel(uint16_t n, uint8_t r, uint8_t g, uint8_t b),
-    setPixel(uint16_t n, uint32_t c),
-    setIntensity(uint8_t),
+    begin(void);
+    show(void);
+    setPixel(uint16_t n, uint8_t r, uint8_t g, uint8_t b);
+    setPixel(uint16_t n, uint32_t c);
+    setIntensity(uint8_t);
     clear(void);
 
  private:
