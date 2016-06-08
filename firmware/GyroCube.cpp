@@ -162,5 +162,5 @@ void GyroCube::setIntensity(uint8_t b) {
 }
 
 void GyroCube::clear(void) {
-  memset(pixels, 0, numBytes);
+  memset(pixels, 0, Bytes);
 }
