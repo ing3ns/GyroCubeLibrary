@@ -153,7 +153,7 @@ void GyroCube::setIntensity(uint8_t b) {
     if(oldIntensity == 0) scale = 0; // Avoid /0
     else if(b == 255) scale = 65535 / oldIntensity;
     else scale = (((uint16_t)newIntensity << 8) - 1) / oldIntensity;
-    for(uint16_t i=0; i<numBytes; i++) {
+    for(uint16_t i=0; i<Bytes; i++) {
       c      = *ptr;
       *ptr++ = (c * scale) >> 8;
     }
@@ -161,6 +161,6 @@ void GyroCube::setIntensity(uint8_t b) {
   }
 }
 
-void Adafruit_NeoPixel::clear(void) {
+void GyroCube::clear(void) {
   memset(pixels, 0, numBytes);
 }
