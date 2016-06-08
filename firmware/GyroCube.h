@@ -7,17 +7,13 @@
 /* ======================= GyroCube.h ======================= */
 /*--------------------------------------------------------------------
   This file is part of the GyroCube library.
-
   GyroCube is free software: you can redistribute it and/or modify
   it under the terms of the GNU Lesser General Public License as
   published by the Free Software Foundation.
-
   Project:       GyroCube
                  
   Version:       1.0
-
   Compiler:      Particle Photon
-
   Author:        Ing3ns
                  
   Date:          5/2016
@@ -36,7 +32,6 @@ class GyroCube{
    GyroCube();
   ~GyroCube();
 
-  
     void begin(void);
     void show(void);
     void setPixel(uint16_t n, uint8_t r, uint8_t g, uint8_t b);
@@ -47,14 +42,14 @@ class GyroCube{
  private:
 
   const uint16_t
-    LEDs,       // Number of RGB LEDs in strip
-    Bytes;      // Size of 'pixels' buffer below
+    LEDs,
+    Bytes;
   uint8_t
-    pin,           // Output pin number
+    pin,
     Intensity,
-   *pixels;        // Holds LED color values (3 bytes each)
+   *pixels;
   uint32_t
-    finalTime;       // Latch timing reference
+    finalTime;
     uint32_t delay = 50L;
 };
 
