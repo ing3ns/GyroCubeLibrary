@@ -38,7 +38,7 @@ class GyroCube{
     void setPixel(uint16_t n, uint32_t c);
     void setIntensity(uint8_t);
     void clear(void);
-
+    void setPixelSide(uint8_t j, uint8_t i, uint32_t c);
  private:
 
   const uint16_t
