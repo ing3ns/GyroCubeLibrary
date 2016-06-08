@@ -12,14 +12,6 @@ GyroCube::GyroCube():LEDs(384), Bytes(384*3), pin(2), Intensity(0), pixels(NULL)
     memset(pixels, 0, Bytes);
   }
   
-  display=(uint8_t **)malloc(8*sizeof(uint8_t*));
-  for (i=0;i<8;i++)display[i]=(uint8_t*)malloc(32*sizeof(uint8_t));
-  
-	for(int j=0;j<8;j++){
-		for(int k=0;k<32;k++){
- 			display[j][k]=0;
-		}
-    }
 }
 
 GyroCube::~GyroCube() {
