@@ -151,14 +151,18 @@ void GyroCube::setPixelSide(uint8_t j, uint8_t i, uint32_t c){
          if(i<=23 & i>=16)disPixel= &pixels[n*(192+8*i)*3];
          if(i<=31 & i>=24)disPixel= &pixels[n*(320-(8*j)+i)*3];
           
+        uint8_t r;
+        uint8_t g;
+        uint8_t b;
+           
         if(Intensity) {
-          uint8_t r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
-          uint8_t g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
-          uint8_t b = ( (c&0x0000FF) * Intensity ) >> 8;
+          r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
+          g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
+          b = ( (c&0x0000FF) * Intensity ) >> 8;
         }else{
-              uint8_t r = (c&0xFF0000)>>16 ;
-              uint8_t g = (c&0x00FF00)>>8 ;
-              uint8_t b = (c&0x0000FF);      
+              r = (c&0xFF0000)>>16 ;
+              g = (c&0x00FF00)>>8 ;
+              b = (c&0x0000FF);      
         }
         
         *disPixel++ = g;
@@ -169,15 +173,18 @@ void GyroCube::setPixelSide(uint8_t j, uint8_t i, uint32_t c){
 
 void GyroCube::setPixel(uint16_t n, uint32_t c) {
   if(n < LEDs) {
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
        
     if(Intensity) {
-      uint8_t r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
-      uint8_t g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
-      uint8_t b = ( (c&0x0000FF) * Intensity ) >> 8;
+      r = ( (c&0xFF0000)>>16 * Intensity ) >> 8;
+      g = ( (c&0x00FF00)>>8 * Intensity ) >> 8;
+      b = ( (c&0x0000FF) * Intensity ) >> 8;
     }else{
-          uint8_t r = (c&0xFF0000)>>16 ;
-          uint8_t g = (c&0x00FF00)>>8 ;
-          uint8_t b = (c&0x0000FF);      
+          r = (c&0xFF0000)>>16 ;
+          g = (c&0x00FF00)>>8 ;
+          b = (c&0x0000FF);      
     }
     uint8_t *p = &pixels[n * 3];
     *p++ = g;
