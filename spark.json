@@ -2,6 +2,6 @@
   "name": "GyroCube",
   "author": "ing3ns <contacto@ing3ns.com>",
   "license": "Ing3ns",
-  "version": "1.0",
+  "version": "0.0.1",
   "description": "Library for Photon GyroCube"
 }
