@@ -169,6 +169,26 @@ void GyroCube::setPixelSide(uint8_t j, uint8_t i, uint32_t c){
         *disPixel = b;
 }
 
+void GyroCube::setPixelSide(uint8_t j, uint8_t i, uint8_t r, uint8_t g, uint8_t b){
+     
+         uint8_t *disPixel;
+         if(i<=7 & i>=0) disPixel=  &pixels[((64+8*i)+j)*3];  
+         if(i<=15 & i>=8)disPixel=  &pixels[(184-(8*j)+(i-8))*3];
+         if(i<=23 & i>=16)disPixel= &pixels[((192+8*(i-16))+j)*3];
+         if(i<=31 & i>=24)disPixel= &pixels[(312-(8*j)+(i-24))*3];
+          
+           
+        if(Intensity) {
+          r = (r * Intensity) >> 8;
+          g = (g * Intensity) >> 8;
+          b = (b * Intensity) >> 8;
+        }
+        
+        *disPixel++ = g;
+        *disPixel++ = r;
+        *disPixel = b;
+}
+
 void GyroCube::setPixel(uint16_t n, uint32_t c) {
   if(n < LEDs) {
     uint8_t r;
